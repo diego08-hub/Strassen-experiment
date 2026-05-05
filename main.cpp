@@ -18,10 +18,14 @@ Matrix generate_random_matrix(int n) {
 
 int main() {
     std::vector<int> sizes = {16, 32, 64, 128, 256, 512};
+    int repetitions = 10;
 
     std::cout << "n,time_ms" << std::endl;
 
     for (int n : sizes) {
+        double total_time = 0;
+
+        for (int r = 0; r < repetitions; ++r) {
         Matrix A = generate_random_matrix(n);
         Matrix B = generate_random_matrix(n);
         Matrix C(n * n, 0.0);
@@ -34,8 +38,10 @@ int main() {
 
         std::chrono::duration<double, std::milli> elapsed = end - start;
 
-        std::cout << n << "," << elapsed.count() << std::endl;
+        total_time += elapsed.count();
+        }
+    //Promedio
+    std::cout << n << "," << total_time / repetitions << std::endl;
     }
-
-    return 0;
+return 0;
 }
