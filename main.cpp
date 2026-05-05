@@ -7,7 +7,7 @@
 Matrix generate_random_matrix(int n) {
     Matrix mat(n * n);
     std::random_device rd;
-    std::mt19937 gen(rd()); //Mersenne Twister
+    static std::mt19937 gen(42); //Motor Mersenne Twister
     std::uniform_real_distribution<> dis(1.0, 10.0);
     
     for (int i = 0; i < n * n; ++i) {
