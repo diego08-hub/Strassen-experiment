@@ -2,7 +2,7 @@ CXX = g++
 
 CXXFLAGS = -O3 -Wall -std=c++17 -march=native
 
-SRC = main.cpp matrix_std.cpp
+SRC = main.cpp matrix_std.cpp matrix_str.cpp
 
 # Ejecutable
 TARGET = experimento
