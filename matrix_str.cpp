@@ -11,7 +11,7 @@ void subtract(const Matrix& A, const Matrix& B, Matrix& C, int n) {
 
 void multiply_strassen(const Matrix& A, const Matrix& B, Matrix& C, int n) {
     //Umbral empírico
-    if (n <= 32) {
+    if (n <= 15) {
         multiply_std(A, B, C, n);
         return;
     }

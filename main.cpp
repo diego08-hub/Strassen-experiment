@@ -27,8 +27,12 @@ bool verify(const Matrix& A, const Matrix& B, int n) {
 }
 
 int main() {
-    std::vector<int> sizes = {16, 32, 64, 128, 256, 512};
+    std::vector<int> sizes = {4, 8, 16, 20, 28, 32, 36, 48, 64, 100, 128, 256, 512};
     int repetitions = 5;
+
+    //Dirigir datos
+    std::ofstream csv_file("resultados.csv");
+    csv_file << "n,std_ms,strassen_ms\n";
 
     std::cout << "n,time_ms" << std::endl;
 
@@ -67,7 +71,10 @@ int main() {
     std::cout << n << ","
           << total_time_std / repetitions << ","
           << total_time_str / repetitions << std::endl;
-    }
 
+    csv_file << n << "," << total_time_std << "," << total_time_str << "\n";
+    }
+    csv_file.close();
+    std::cout << "Datos guardados en resultados.csv" << std::endl;
     return 0;
 }
