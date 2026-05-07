@@ -31,7 +31,7 @@ int main() {
     int repetitions = 10;
 
     //Dirigir datos
-    std::ofstream csv_file("data/resultados_bc08.csv");
+    std::ofstream csv_file("data/resultados_bc32.csv");
     csv_file << "n,std_ms,strassen_ms\n";
 
     std::cout << "n,time_ms" << std::endl;
