@@ -35,46 +35,49 @@ int main() {
     csv_file << "n,std_ms,strassen_ms\n";
 
     std::cout << "n,time_ms" << std::endl;
+	std::cout << "n\tStd(ms)\tStr(ms)\tStatus" << std::endl;
 
     for (int n : sizes) {
         double total_time_std = 0;
-	double total_time_str = 0;
-	bool is_correct = true;
+		double total_time_str = 0;
+		bool is_correct = true;
 
         for (int r = 0; r < repetitions; ++r) {
-        Matrix A = generate_random_matrix(n);
-        Matrix B = generate_random_matrix(n);
-        Matrix C_std(n * n, 0.0);
-	Matrix C_str(n*n,0.0);
+        	Matrix A = generate_random_matrix(n);
+            Matrix B = generate_random_matrix(n);
+        	Matrix C_std(n * n, 0.0);
+			Matrix C_str(n*n,0.0);
 
-	//Medida estandar
-	auto start = std::chrono::high_resolution_clock::now();
-        multiply_std(A, B, C_std, n);
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double, std::milli> elapsed = end - start;
-        total_time_std += elapsed.count();
+			//Medida estandar
+			auto start = std::chrono::high_resolution_clock::now();
+        	multiply_std(A, B, C_std, n);
+        	auto end = std::chrono::high_resolution_clock::now();
+	        std::chrono::duration<double, std::milli> elapsed = end - start;
+        	total_time_std += elapsed.count();
 
-	//Medida strassen
-	start = std::chrono::high_resolution_clock::now();
-    	multiply_strassen(A, B, C_str, n);
-    	end = std::chrono::high_resolution_clock::now();
-    	std::chrono::duration<double, std::milli> t_str = end - start;
-	total_time_str += t_str.count();
+			//Medida strassen
+			start = std::chrono::high_resolution_clock::now();
+    		multiply_strassen(A, B, C_str, n);
+    		end = std::chrono::high_resolution_clock::now();
+    		std::chrono::duration<double, std::milli> t_str = end - start;
+			total_time_str += t_str.count();
 
-	//si son iguales, solo primera
-	if (r == repetitions-1 && !verify(C_std, C_str, n)) {
-                is_correct = false;
-            }
-        }
-	std::cout <<(is_correct ? "OK" : "ERROR") << std::endl;
-    //Promedio
-
-    std::cout << "n,std_ms,strassen_ms" << std::endl;
-    std::cout << n << ","
-          << total_time_std / repetitions << ","
-          << total_time_str / repetitions << std::endl;
-
-    csv_file << n << "," << total_time_std << "," << total_time_str << "\n";
+			//si son iguales, solo primera
+			if (r == repetitions-1 && !verify(C_std, C_str, n)) {
+	                is_correct = false;
+        	    }
+       	 }
+		//Promedio
+		total_time_std /= repetitions;
+		total_time_str /= repetitions;
+		
+		csv_file << n << "," << total_time_std << "," << total_time_str << "\n";
+    	
+    	
+    	std::cout << n << "\t"
+			<< total_time_std << "\t"
+			<< total_time_str << "\t"
+		    << (is_correct ? "OK" : "ERROR") << std::endl;
     }
 
     csv_file.close();
