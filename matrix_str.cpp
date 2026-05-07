@@ -8,10 +8,14 @@ void add(const Matrix& A, const Matrix& B, Matrix& C, int n) {
 void subtract(const Matrix& A, const Matrix& B, Matrix& C, int n) {
     for (int i = 0; i < n * n; i++) C[i] = A[i] - B[i];
 }
-
+int next_power_of_2(int n) {
+    int p = 1;
+    while (p < n) p *= 2;
+    return p;
+}
 void multiply_strassen(const Matrix& A, const Matrix& B, Matrix& C, int n) {
     //Umbral empírico
-    if (n <= 15) {
+    if (n <= 32) {
         multiply_std(A, B, C, n);
         return;
     }
@@ -75,7 +79,39 @@ void multiply_strassen(const Matrix& A, const Matrix& B, Matrix& C, int n) {
             // C21
             C[(i + k) * n + j] = p3[idx] + p4[idx];
             // C22
-            C[(i + k) * n + (j + k)] = p5[idx] + p1[idx] - p3[idx] - p7[idx];
+            C[(i + k) * n + (j + k)] = p5[idx] + p1[idx] - p3[idx] + p7[idx];
+        }
+    }
+}
+void multiply_strassen_any_size(const Matrix& A, const Matrix& B, Matrix& C, int n) {
+    // Ya es potencia de 2?
+    int m = next_power_of_2(n);
+    
+    if (m == n) {
+        multiply_strassen(A, B, C, n);
+        return;
+    }
+
+    // Padding con ceros
+    Matrix A_padded(m * m, 0.0);
+    Matrix B_padded(m * m, 0.0);
+    Matrix C_padded(m * m, 0.0);
+
+    // Copiar 
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            A_padded[i * m + j] = A[i * n + j];
+            B_padded[i * m + j] = B[i * n + j];
+        }
+    }
+
+    // Ejecutar Strassen
+    multiply_strassen(A_padded, B_padded, C_padded, m);
+
+    // Copiar el resultado de vuelta a la matriz C original (recortar)
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            C[i * n + j] = C_padded[i * m + j];
         }
     }
 }
