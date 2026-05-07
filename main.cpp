@@ -27,11 +27,11 @@ bool verify(const Matrix& A, const Matrix& B, int n) {
 }
 
 int main() {
-    std::vector<int> sizes = {4, 6, 8, 10, 14, 16, 20, 28, 32, 36, 40, 48, 64, 90, 100, 128, 256, 302, 416, 512};
+    std::vector<int> sizes = {4, 8, 16, 32, 64, 128, 256, 512};
     int repetitions = 10;
 
     //Dirigir datos
-    std::ofstream csv_file("resultados.csv");
+    std::ofstream csv_file("data/resultados.csv");
     csv_file << "n,std_ms,strassen_ms\n";
 
     std::cout << "n,time_ms" << std::endl;
@@ -57,7 +57,7 @@ int main() {
 
 			//Medida strassen
 			start = std::chrono::high_resolution_clock::now();
-    		multiply_strassen_any_size(A, B, C_str, n);
+    		multiply_strassen(A, B, C_str, n);
     		end = std::chrono::high_resolution_clock::now();
     		std::chrono::duration<double, std::milli> t_str = end - start;
 			total_time_str += t_str.count();
