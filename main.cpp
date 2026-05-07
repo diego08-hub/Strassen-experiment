@@ -27,7 +27,7 @@ bool verify(const Matrix& A, const Matrix& B, int n) {
 }
 
 int main() {
-    std::vector<int> sizes = {4, 8, 16, 24, 32, 48, 64, 96, 128, 192, 256, 512};
+    std::vector<int> sizes = {4,8,16,32,64,128,256,512};
     int repetitions = 10;
 
     //Dirigir datos

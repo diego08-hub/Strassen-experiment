@@ -9,7 +9,7 @@ DATA_DIR = data
 PLOT_DIR = plots
 
 CSV_OUT = $(DATA_DIR)/resultados.csv
-GRAPH_OUT = $(PLOT_DIR)/grafico_potencia2.png
+GRAPH_OUT = $(PLOT_DIR)/grafico_bc16.png
 
 PLOT_SCRIPT = plot_script.gp
 
@@ -27,6 +27,6 @@ run: $(TARGET)
 
 clean:
 	rm -f $(TARGET)
-	rm -f $(CSV_OUT)
-	rm -f $(GRAPH_OUT)
+	# rm -f $(CSV_OUT)
+	# rm -f $(GRAPH_OUT)
 
