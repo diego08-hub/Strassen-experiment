@@ -62,11 +62,13 @@ int main() {
 	total_time_str += t_str.count();
 
 	//si son iguales, solo primera
-	if (r == 0 && !verify(C_std, C_str, n)) {
+	if (r == repetitions-1 && !verify(C_std, C_str, n)) {
                 is_correct = false;
             }
         }
+	std::cout <<(is_correct ? "OK" : "ERROR") << std::endl;
     //Promedio
+
     std::cout << "n,std_ms,strassen_ms" << std::endl;
     std::cout << n << ","
           << total_time_std / repetitions << ","
@@ -74,6 +76,7 @@ int main() {
 
     csv_file << n << "," << total_time_std << "," << total_time_str << "\n";
     }
+
     csv_file.close();
     std::cout << "Datos guardados en resultados.csv" << std::endl;
     return 0;
