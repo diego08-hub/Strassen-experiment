@@ -15,7 +15,7 @@ int next_power_of_2(int n) {
 }
 void multiply_strassen(const Matrix& A, const Matrix& B, Matrix& C, int n) {
     //Umbral empírico
-    if (n <= 32) {
+    if (n <= 8) {
         multiply_std(A, B, C, n);
         return;
     }

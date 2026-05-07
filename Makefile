@@ -1,6 +1,6 @@
 CXX = g++
 
-CXXFLAGS = -O3 -Wall -std=c++17 -march=native
+CXXFLAGS = -O2 -Wall -std=c++17 -march=native
 
 SRC = main.cpp matrix_std.cpp matrix_str.cpp
 TARGET = experimento

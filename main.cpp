@@ -27,11 +27,11 @@ bool verify(const Matrix& A, const Matrix& B, int n) {
 }
 
 int main() {
-    std::vector<int> sizes = {4, 8, 16, 32, 64, 128, 256, 512};
+    std::vector<int> sizes = {4, 8, 16, 24, 32, 48, 64, 96, 128, 192, 256, 512};
     int repetitions = 10;
 
     //Dirigir datos
-    std::ofstream csv_file("data/resultados.csv");
+    std::ofstream csv_file("data/resultados_bc08.csv");
     csv_file << "n,std_ms,strassen_ms\n";
 
     std::cout << "n,time_ms" << std::endl;
